@@ -1,0 +1,10 @@
+{
+  "name": "myApp2",
+  "app_id": "1bb35d92",
+  "proxies": [
+    {
+      "path": "/ada",
+      "proxyUrl": "http://85.105.94.50/ada"
+    }
+  ]
+}

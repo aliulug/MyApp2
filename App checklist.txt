@@ -1,0 +1,9 @@
+App checklist
+
+* Baglanma bug'i duzelt
+* Police numarasi yerine sirket ismi (hardcode veya web servisi ile)
+* Trafik/kasko'da plaka + vade tarihleri
+* Policeye girince detaylar
+* Push notification
+
+** Teklif istemek
