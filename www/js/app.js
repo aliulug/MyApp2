@@ -20,7 +20,7 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 // ApiUrl = 'http://192.168.2.187';
 // ApiUrl = 'http://85.105.94.50';
 
-.constant('ApiUrl','http://85.105.94.50')
+.constant('ApiUrl','')
 
 // define services
 
