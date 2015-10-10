@@ -198,14 +198,24 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 			SAG: [],
 			TRF: [],
 			YNG: []
-		};		
-		$http.post(ApiUrl + '/ada/Police.PoliceAra.aaw', ['58024511590']).
-		then(function(response2) {
-			webService.placePoliceler(response2.data);
-			$state.go('policeSelector');
-		}, function(response2) {
-			alert(response2);
-		});
+		};
+
+		// put this back on when server is online
+
+		// $http.post(ApiUrl + '/ada/Police.PoliceAra.aaw', ['58024511590']).
+		// then(function(response2) {
+		// 	webService.placePoliceler(response2.data);
+		// 	$state.go('policeSelector');
+		// }, function(response2) {
+		// 	alert(response2);
+		// });
+		
+		// workaround for offline server
+
+		var exData = {"data":[{"FprkPol":41936,"Tanzim":"2015-08-12T00:00:00","Baslangic":"2015-08-25T00:00:00","Bitis":"2016-08-25T00:00:00","Brans":"108","PolGrp":"TRF","PoliceNo":"8421306","TecditNo":"0","ZeyilNo":"","FfrkSir":10,"FfrkMus":3053,"FfrkTa":3053,"FfrkSat":5546,"FfrkSor":0,"Sigortali":"İHSAN EKİNCİ","SigortaEttiren":"İHSAN EKİNCİ","Plaka":"06BY8462","TeklifDurumu":0,"Il":6,"Ilce":"MAMAK","FyrlkDrm":1,"PolTek":1,"FfrkTt":0,"FpolTip":0,"FTcKimNo":"58024511590","FVerKimNo":"","FSeTcKimNo":"58024511590","FSeVergiNo":"","Marka":"","FfrkMizBlg":0,"GrupSigortaliKimlikNoListesi":""},{"FprkPol":38199,"Tanzim":"2015-05-22T00:00:00","Baslangic":"2015-05-07T00:00:00","Bitis":"2015-07-31T00:00:00","Brans":"143","PolGrp":"KZA","PoliceNo":"305196713","TecditNo":"01","ZeyilNo":"01","FfrkSir":5,"FfrkMus":41,"FfrkTa":0,"FfrkSat":4258,"FfrkSor":0,"Sigortali":"İHSAN EKİNCİ","SigortaEttiren":"TEPE İŞ SAĞLIĞI VE GÜVENLİĞİ HİZMETLERİ A.Ş.","Plaka":"","TeklifDurumu":0,"Il":999,"Ilce":"","FyrlkDrm":3,"PolTek":1,"FfrkTt":0,"FpolTip":0,"FTcKimNo":"58024511590","FVerKimNo":"","FSeTcKimNo":"","FSeVergiNo":"8390546737","Marka":"","FfrkMizBlg":0,"GrupSigortaliKimlikNoListesi":""},{"FprkPol":38198,"Tanzim":"2015-05-22T00:00:00","Baslangic":"2015-05-07T00:00:00","Bitis":"2015-07-31T00:00:00","Brans":"143","PolGrp":"KZA","PoliceNo":"305196713","TecditNo":"01","ZeyilNo":"","FfrkSir":5,"FfrkMus":3053,"FfrkTa":3053,"FfrkSat":5546,"FfrkSor":0,"Sigortali":"İHSAN EKİNCİ","SigortaEttiren":"","Plaka":"","TeklifDurumu":0,"Il":6,"Ilce":"MAMAK","FyrlkDrm":3,"PolTek":1,"FfrkTt":0,"FpolTip":0,"FTcKimNo":"58024511590","FVerKimNo":"","FSeTcKimNo":"","FSeVergiNo":"","Marka":"","FfrkMizBlg":0,"GrupSigortaliKimlikNoListesi":""}],"status":200,"config":{"method":"POST","transformRequest":[null],"transformResponse":[null],"url":"/ada/Police.PoliceAra.aaw","data":["58024511590"],"headers":{"Accept":"application/json,\ntext/plain,\n*/*","Content-Type":"application/json;charset=utf-8"}},"statusText":"OK"};
+		webService.placePoliceler(exData.data);
+		$state.go('policeSelector');
+
 	};
 
 	$scope.loginRoutine = function (userName,pass) {
@@ -216,7 +226,11 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 			userPass : pass
 		};
 	
-		webService.serverAsk(init);
+		// put this back on when server is online
+		// webService.serverAsk(init);
+
+		// workaround for offline server
+		init();
 
 	};
 })
