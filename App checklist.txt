@@ -7,3 +7,6 @@ App checklist
 * Push notification
 
 ** Teklif istemek
+
+--> Arac tipini servis nasil gonderiyor?
+--> fsonplaka
