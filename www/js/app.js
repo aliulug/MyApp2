@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'ionic.service.core'])
+angular.module('app', ['ionic','ionic.service.core', 'ionic.service.core'])
 
 // app startup
 
@@ -13,6 +13,23 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 			// org.apache.cordova.statusbar required
 			StatusBar.styleDefault();
 		}
+
+
+		// Push Message initiator
+		Ionic.io();
+
+		var push = new Ionic.Push({
+			"onNotification": function(notification) {
+			    var payload = notification.payload;
+			    alert(angular.toJson(notification)+angular.toJson(payload));
+			  }
+		});
+
+		push.register(function(token) {
+		  // Log out your device token (Save this!)
+		  alert("Got Token:"+token.token);
+
+		});
 	});
 
 })
