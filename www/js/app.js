@@ -30,7 +30,7 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 	viewConfig.TRF = {
 		mainView: ["Plaka"],
 		mainViewSub: [],
-		detailedView: ["Sigortali","Plaka","PoliceNo","Marka","FfrkSir","Bitis","FbrtPrm"]
+		detailedView: ["Sigortali","Plaka","PoliceNo","Marka","FfrkSir","Bitis"]
 	};
 
 	viewConfig.BES = {};
@@ -283,7 +283,7 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 		});
 	};
 
-	webService.serverAsk(askDetails);
+	// webService.serverAsk(askDetails);
 
 })
 
