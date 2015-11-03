@@ -17,8 +17,8 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 
 })
 
-// ApiUrl = 'http://192.168.2.187';
-// ApiUrl = 'http://85.105.94.50';
+// ApiUrl = 'http://192.168.2.187/ada';
+// ApiUrl = 'http://85.105.94.50/ada';
 
 .constant('ApiUrl','')
 
@@ -30,7 +30,7 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 	viewConfig.TRF = {
 		mainView: ["Plaka"],
 		mainViewSub: [],
-		detailedView: ["Sigortali","Plaka","PoliceNo","Marka","FfrkSir","Bitis"]
+		detailedView: ["Sigortali","Plaka","PoliceNo","Marka","FfrkSir","Bitis","FbrtPrm"]
 	};
 
 	viewConfig.BES = {};
@@ -119,11 +119,11 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 	var webService, loginJson, ApiUrl
 
 	webService = {};
-	loginJson = ['ADAYAZILIM','adaada'];
+	loginJson = ['Uluc','UlucSen159'];
 
 	webService.serverAsk = function (query) {
 		$ionicLoading.show({
-		    template: 'Logging in...'
+		    template: 'Loading...'
 		  });
 		$http.post(ApiUrl + '/ada/Login.GirisYap.aaw', loginJson).
 		then(function(response) {
@@ -199,12 +199,12 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 			TRF: [],
 			YNG: []
 		};		
-		$http.post(ApiUrl + '/ada/Police.PoliceAra.aaw', ['58024511590']).
+		$http.post(ApiUrl + '/ada/Police.PoliceAra.aaw', ['4810494813']).
 		then(function(response2) {
 			webService.placePoliceler(response2.data);
 			$state.go('policeSelector');
 		}, function(response2) {
-			alert(response2);
+			alert(angular.toJson(response2));
 		});
 	};
 
@@ -269,10 +269,21 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 	});
 })
 
-.controller('pdController', function($scope,$stateParams) {
+.controller('pdController', function($scope,$stateParams,$http,webService,ApiUrl) {
 
 	$scope.police = $stateParams.viewData;
 	$scope.conf = $stateParams.viewConf;
+
+	//alert(angular.toJson($scope.police));
+
+	var askDetails = function() {
+		$http.post(ApiUrl + '/ada/Police.PoliceBilgileriniAl.aaw', [$scope.police.FprkPol,['FbrtPrm']]).
+		then(function(response){
+			alert(angular.toJson(response.data));
+		});
+	};
+
+	webService.serverAsk(askDetails);
 
 })
 

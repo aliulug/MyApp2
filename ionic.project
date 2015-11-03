@@ -4,7 +4,7 @@
   "proxies": [
     {
       "path": "/ada",
-      "proxyUrl": "http://85.105.94.50/ada"
+      "proxyUrl": "http://demo.adayazilim.com"
     }
   ]
 }
