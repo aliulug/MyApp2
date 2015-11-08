@@ -18,10 +18,9 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 })
 
 // ApiUrl = 'http://192.168.2.187';
-// ApiUrl = 'http://85.105.94.50';
-// ApiUrl = '/ada'
+// ApiUrl = '/ada';
 
-.constant('ApiUrl','')
+.constant('ApiUrl','/ada')
 
 // define services
 
@@ -56,58 +55,60 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 .factory('viewService', function($rootScope, viewConfig) {
 	var viewService = {};
 
+	viewService.userInfo = false;
+
 	viewService.currentView = {};
 
 	viewService.prepareView = function(passed) {
 		switch(passed) {
 			case "BES":
 			viewService.currentView.title = "Bireysel Emeklilik";
-			viewService.currentView.policeler = $rootScope.userInfo.BES;
+			viewService.currentView.policeler = viewService.userInfo.BES;
 			viewService.currentView.views = viewConfig.BES ;
 			break;
 			case "DSK":
 			viewService.currentView.title = "Dask";
-			viewService.currentView.policeler = $rootScope.userInfo.DSK;
+			viewService.currentView.policeler = viewService.userInfo.DSK;
 			viewService.currentView.views = viewConfig.DSK ;
 			break;
 			case "HAY":
-			viewService.currentView.title = "Hayat Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.HAY;
+			viewService.currentView.title = "Hayat Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.HAY;
 			viewService.currentView.views = viewConfig.HAY ;
 			break;
 			case "KKO":
 			viewService.currentView.title = "Kasko";
-			viewService.currentView.policeler = $rootScope.userInfo.KKO;
+			viewService.currentView.policeler = viewService.userInfo.KKO;
 			viewService.currentView.views = viewConfig.KKO ;
 			break;
 			case "KZA":
-			viewService.currentView.title = "Kaza Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.KZA;
+			viewService.currentView.title = "Kaza Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.KZA;
 			viewService.currentView.views = viewConfig.KZA ;
 			break;
 			case "MHE":
-			viewService.currentView.title = "Muhendislik Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.MHE;
+			viewService.currentView.title = "Mühendislik Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.MHE;
 			viewService.currentView.views = viewConfig.MHE ;
 			break;
 			case "NAK":
-			viewService.currentView.title = "Nakliyat Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.NAK;
+			viewService.currentView.title = "Nakliyat Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.NAK;
 			viewService.currentView.views = viewConfig.NAK ;
 			break;
 			case "SAG":
-			viewService.currentView.title = "Saglik Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.SAG;
+			viewService.currentView.title = "Sağlık Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.SAG;
 			viewService.currentView.views = viewConfig.SAG ;
 			break;
 			case "TRF":
-			viewService.currentView.title = "Trafik Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.TRF;
+			viewService.currentView.title = "Trafik Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.TRF;
 			viewService.currentView.views = viewConfig.TRF ;
 			break;
 			case "YNG":
-			viewService.currentView.title = "Yangin Sigortasi";
-			viewService.currentView.policeler = $rootScope.userInfo.YNG;
+			viewService.currentView.title = "Yangın Sigortası";
+			viewService.currentView.policeler = viewService.userInfo.YNG;
 			viewService.currentView.views = viewConfig.YNG ;
 			break;
 		}
@@ -116,29 +117,28 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 	return viewService;
 })
 
-.factory('webService', function($http, $rootScope, $ionicLoading, ApiUrl, $ionicPopup) {
+.factory('webService', function($http, viewService, $ionicLoading, ApiUrl, $ionicPopup) {
 	var webService, loginJson, ApiUrl
 
 	webService = {};
 	loginJson = ['Uluc','UlucSen159'];
 
-	webService.serverAsk = function (query) {
+	webService.serverAsk = function (query,query1) {
 		$ionicLoading.show({
-		    template: 'Logging in...'
+		    template: 'Giriş yapılıyor...'
 		  });
 		$http.post(ApiUrl + '/Login.GirisYap.aaw', loginJson).
 		then(function(response) {
-
 			query();
-
 		}, function(response) {
 			$ionicPopup.alert({
-				title: 'Sorry!',
-				template: 'Could not connect to the server.'
+				title: 'Hata!',
+				template: 'Bağlantı kurulamadı.'
 			});
 		}).
 		finally(function() {
 			$ionicLoading.hide();
+			query1();
 		});
 	};
 
@@ -146,37 +146,37 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 		for (var i = JsonData.length - 1; i >= 0; i--) {
 			switch (JsonData[i].PolGrp) {
 				case "BES":
-					$rootScope.userInfo.BES.push(JsonData[i]);
+					viewService.userInfo.BES.unshift(JsonData[i]);
 					break;
 				case "DSK":
-					$rootScope.userInfo.DSK.push(JsonData[i]);
+					viewService.userInfo.DSK.unshift(JsonData[i]);
 					break;
 				case "HAY":
-					$rootScope.userInfo.HAY.push(JsonData[i]);
+					viewService.userInfo.HAY.unshift(JsonData[i]);
 					break;
 				case "KKO":
-					$rootScope.userInfo.KKO.push(JsonData[i]);
+					viewService.userInfo.KKO.unshift(JsonData[i]);
 					break;
 				case "KZA":
-					$rootScope.userInfo.KZA.push(JsonData[i]);
+					viewService.userInfo.KZA.unshift(JsonData[i]);
 					break;
 				case "MHE":
-					$rootScope.userInfo.MHE.push(JsonData[i]);
+					viewService.userInfo.MHE.unshift(JsonData[i]);
 					break;
 				case "NAK":
-					$rootScope.userInfo.NAK.push(JsonData[i]);
+					viewService.userInfo.NAK.unshift(JsonData[i]);
 					break;
 				case "SAG":
-					$rootScope.userInfo.SAG.push(JsonData[i]);
+					viewService.userInfo.SAG.unshift(JsonData[i]);
 					break;
 				case "TRF":
-					$rootScope.userInfo.TRF.push(JsonData[i]);
+					viewService.userInfo.TRF.unshift(JsonData[i]);
 					break;
 				case "YNG":
-					$rootScope.userInfo.YNG.push(JsonData[i]);
+					viewService.userInfo.YNG.unshift(JsonData[i]);
 					break;
 			}
-
+			viewService.userInfo.ready= true;
 		};
 	};
 
@@ -185,10 +185,10 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 
 // define controllers
 
-.controller('loginController', function($state,$rootScope,$http,$scope, webService, ApiUrl, $q, $ionicPopup) {
+.controller('loginController', function(viewService,$state,$rootScope,$http,$scope,webService,ApiUrl,$ionicPopup) {
 
 	var init = function() {
-		$rootScope.userInfo = {
+		viewService.userInfo = {
 			BES: [],
 			DSK: [],
 			HAY: [],
@@ -206,7 +206,6 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 		$http.post(ApiUrl + '/Police.PoliceAra.aaw', ['4810494813']).
 		then(function(response2) {
 			webService.placePoliceler(response2.data);
-			$state.go('policeSelector');
 		}, function(response2) {
 			alert(response2);
 		});
@@ -219,6 +218,10 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 
 	};
 
+	var initThen = function() {
+		$state.go('policeSelector');
+	};
+
 	$scope.loginRoutine = function (userName,pass) {
 		// POST the data to login server
 		// assume this is the success callback
@@ -228,7 +231,7 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 		};
 	
 		// put this back on when server is online
-		webService.serverAsk(init);
+		webService.serverAsk(init,initThen);
 
 		// workaround for offline server
 		// init();
@@ -236,8 +239,9 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 	};
 })
 
-.controller('policeSelector', function($rootScope, $scope, viewService, $state) {
+.controller('policeSelector', function($scope, viewService, $state) {
 	$scope.policeTurleri = ["BES", "DSK", "HAY", "KKO", "KZA", "MHE", "NAK", "SAG", "TRF", "YNG"];
+	$scope.userInfo = viewService.userInfo;
 
 	$scope.moveToType = function(tur) {
 		viewService.prepareView(tur);

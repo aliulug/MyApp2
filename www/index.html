@@ -35,7 +35,7 @@
   </div>
 
   <script id="page1.html" type="text/ng-template">
-  <ion-view style="" title="Company Name">
+  <ion-view style="" title="Şirket Adı">
       <ion-content class="has-header" padding="true">
           <div style="line-height: 250px; background-color: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; width: 100%; height: auto;">
               <i style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;" class="icon ion-image"></i>
@@ -52,26 +52,29 @@
           <form style="">
               <ion-list style="">
                   <label style="" class="item item-input">
-                      <span class="input-label">Kullanici Adi</span>
+                      <span class="input-label">Kullanıcı Adı</span>
                       <input placeholder="" type="text" ng-model="userName">
                   </label>
                   <label style="" class="item item-input">
-                      <span class="input-label">Sifre</span>
+                      <span class="input-label">Şifre</span>
                       <input placeholder="" type="password" ng-model="pass">
                   </label>
               </ion-list>
               <div style="height: 40px;" class="spacer"></div>
-              <button style="" class="button button-stable button-block" ng-click="loginRoutine(userName,pass)">Log in</button>
-              <a style="" class="button button-positive button-clear button-block " href="#/signup">Or create an account</a>
+              <button style="" class="button button-stable button-block" ng-click="loginRoutine(userName,pass)">Giriş Yap</button>
+              <a style="" class="button button-positive button-clear button-block " href="#/signup">Veya bir hesap yarat</a>
           </form>
       </ion-content>
   </ion-view>
   </script>
 
   <script id="page3.html" type="text/ng-template">
-  <ion-view style="" title="Welcome">
+  <ion-view style="" title="Hoş geldiniz">
       <ion-content class="has-header" padding="true">
           <div class="list">
+            <li class="item" ng-hide="userInfo.ready">
+              <center><img src="img/loading.gif"></center>
+            </li>
             <li class="item item-avatar" ng-repeat="tur in policeTurleri" ng-show="userInfo[tur].length" ng-click="moveToType(tur)">
               <img src="img/police_kasko.png" />
               <h2>{{tur}}</h2>
@@ -96,14 +99,14 @@
         </div>
       </ion-content>
       <ion-footer-bar class="bar bar-footer bar-stable" ng-click="openModal();">
-        <h1 class="title"> Teklif Iste</h1>
+        <h1 class="title">Teklif İste</h1>
         <button class="button-clear button-icon icon ion-ios-plus-empty"></button>
       </ion-footer-bar>
   </ion-view>
   </script>
 
   <script id="policeDetay.html" type="text/ng-template">
-    <ion-view style="" title="Police Detaylari">
+    <ion-view style="" title="Police Detayları">
       <ion-content class="has-header">
         <ul class="list">
         <li class="item" ng-repeat="header in conf">
@@ -120,7 +123,7 @@
   <script id="kasko-modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">Teklif Iste</h1>
+      <h1 class="title">Teklif İste</h1>
     </ion-header-bar>
     <ion-content>
     <div class="list">
@@ -130,11 +133,11 @@
       </label>
 
       <label class="item item-input">
-        <input type="text" placeholder="Arac Plakasi">
+        <input type="text" placeholder="Araç Plakası">
       </label>
 
       <label class="item item-input">
-        <input type="text" placeholder="Arac Modeli">
+        <input type="text" placeholder="Araç Modeli">
       </label>
 
     </div>
