@@ -23,7 +23,7 @@ angular.module('app', ['ionic', 'ionic.service.core'])
 
 // DON'T FORGET TO PROPERLY SET THIS WHEN BUILDING
 
-.constant('ApiUrl', '/ada')
+.constant('ApiUrl', 'http://demo.adayazilim.com')
 
 // define services
 
